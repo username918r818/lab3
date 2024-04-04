@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Lab3</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <h:outputStylesheet library="css" name="style.css"/>
+    <!-- <meta charset="utf-8"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+    <header>
+        <h1>вторая лаба по вебу</h1>
+        <h2>95876 закусов кирилл P3108</h2>
+    </header>
+
+
+    <h:form id="newPointForm">
+        <!-- x - p:slider (-5, 5) step = 1 -->
+        <div>
+            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                <p:inputText id="x" value="#{resultList.tmpPoint.x}"/>
+                <p:slider for="x" step="1" minValue="-5" maxValue="5"/>
+            </h:panelGrid>
+        </div>
+        <!-- y input text (-3, 5) -->
+        <div>
+            <h:outputLabel for="y" value="y"></h:outputLabel>
+            <h:inputText id="y" value="#{resultList.tmpPoint.y}"></h:inputText>
+        </div>
+        <div id="rLinks">
+            <h:commandLink value="1" action="#{resultList.insertR(1)}"></h:commandLink>
+            <br />
+            <h:commandLink value="1.5" action="#{resultList.insertR(1.5)}"></h:commandLink>
+            <br />
+            <h:commandLink value="2.5" action="#{resultList.insertR(2.5)}"></h:commandLink>
+            <br />
+            <h:commandLink value="3" action="#{resultList.insertR(3)}"></h:commandLink>
+            <br />
+            <h:commandLink value="2" action="#{resultList.insertR(2)}"></h:commandLink>
+
+        </div>
+    </h:form>
+    <canvas id="graphImage"></canvas>
+    <div id="rForGrapgh">
+        <select id="rSelect" onchange="redrawGraph(this.value)">
+            <option value="1">1</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <h:panelGroup id="pointTable">
+        <h:dataTable value="#{resultList.points}" var="point">
+            <h:column>
+                <f:facet name="header">x</f:facet>
+                #{point.x}
+            </h:column>
+            <h:column>
+                <f:facet name="header">y</f:facet>
+                #{point.y}
+            </h:column>
+            <h:column>
+                <f:facet name="header">r</f:facet>
+                #{point.r}
+            </h:column>
+            <h:column>
+                <f:facet name="header">isInside</f:facet>
+                #{point.isInside()}
+            </h:column>
+        </h:dataTable>
+    </h:panelGroup>
+    <script src="script.js"></script>
+</h:body>
+
+</html>

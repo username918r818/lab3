@@ -35,7 +35,15 @@ public class ResultList implements Serializable {
     }
 
     private boolean isInside(double x, double y, double r) {
-        return x * x + y * y <= r;
+        if (x >= 0 && y >= 0) {
+            return x * x +y*y  <= r * r / 4;
+        } else if (x>=0 && y<=0) {
+            return y + r/2 >= x;
+        } else if (x<=0 && y<=0) {
+            return x >= -r && y >= -r/2;
+        } else {
+            return false;
+        }
     }
 
     public ArrayList<Point> getPoints() {
